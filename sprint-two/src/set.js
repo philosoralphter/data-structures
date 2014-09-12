@@ -12,7 +12,7 @@ setPrototype.add = function(item){
 
 setPrototype.contains = function(item){
   for (var key in this){
-    if (key.toString() === item.toString()){
+    if (this[key] == item){
       return true;
     }
   }
