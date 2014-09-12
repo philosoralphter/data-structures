@@ -54,11 +54,13 @@ var makeBinarySearchTree = function(value){
 
   newTree.depthFirstLog = function (callback){
 
-     /* callback(this.value);
+     /* MIKE'S SOLUTION
+    callback(this.value);
     if (this.left !== null) {this.left.depthFirstLog(callback);}
     if (this.right !== null) {this.right.depthFirstLog(callback);}
     */
 
+    //RALPHS "RECURSE THIS" SOLUTION
     var recurse = function(tree){
       callback(tree.value);
       if(tree.left != null) recurse(tree.left);
