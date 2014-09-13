@@ -14,12 +14,10 @@ HashTable.prototype.insert = function(key, value, ignore){
   if (element === undefined){
     this._storage.set(location, [pair]);
     this._size++;
-    console.log(key, value, this._size)
   }else{
     element.push(pair);
     this._storage.set(location, element);
     this._size++;
-    console.log(key,value,this._size)
   }
   if(ignore !== "ignore") {
     this.sizeCheck();
@@ -48,7 +46,6 @@ HashTable.prototype.remove = function(key){
         element.splice(i,1);
         this._storage.set(location, element)
         this._size--;
-        console.log(key,this._size)
       }
     }
   }
