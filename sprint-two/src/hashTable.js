@@ -20,7 +20,6 @@ HashTable.prototype.insert = function(key, value){
     this._size++;
   }
 
-
   this.sizeCheck();
 
 };
@@ -34,6 +33,7 @@ HashTable.prototype.retrieve = function(key){
       return element[i][1];
     }
   }
+  return null;
 };
 
 HashTable.prototype.remove = function(key){
@@ -42,49 +42,52 @@ HashTable.prototype.remove = function(key){
 
   for (var i=0; i<element.length; i++){
     if (element[i][0] === key){
-      element[i][1] = null;
+      element.splice(i,1);
       this._storage.set(location, element)
       this.size--;
     }
   }
+  this.sizeCheck();
 };
 
 HashTable.prototype.changeSize = function(todo) {
 
+  var tempStorage = this._storage;
+  console.log("line56: ", tempStorage);
+
   if (todo === 'double') {
-    var tempStorage = this._storage;
     this._limit *= 2;
+    console.log(this._limit);
     this._storage = makeLimitedArray(this._limit);
 
   }else if (todo ==='halve'){
-    var tempStorage = this._storage;
     this._limit /= 2;
     this._storage = makeLimitedArray(this._limit);
   }
 
   var transfer = function(element, index, storage) {
+
     for (var i=0; i<element.length; i++){
       var currentPair = element[i];
       this.insert(currentPair[0], currentPair[1]);
     }
   }
 
-  tempStorage.each(transfer);
+  tempStorage.each(transfer);  // <--- Not working
+
 };
 
-
 HashTable.prototype.sizeCheck = function(){
-  console.log(this._size)
 
-  if (this._size > this._limit) {
+  if (this._size > this._limit/2) {
    console.log("doubling table size");
    this.changeSize('double');
 
   }else if (this._size < this._limit/2 && this._limit > 8){
     console.log("halving size");
+
     this.changeSize('halve');
   }
-
 };
 
 
