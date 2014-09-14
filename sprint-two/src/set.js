@@ -37,10 +37,11 @@ setPrototype.each = function(callback){
   }
 }
 
-setPrototype.retrieve = function() {
+setPrototype.retrieveFirstItem = function() {
   return this._storage[0];
 };
 
+/*
 setPrototype.confirmEdge = function(fromNode,toNode) {
   for (var i=0; i<this._storage.length; i++) {
     if (this._storage[i].contains(fromNode) && this._storage[i].contains(toNode)) {
@@ -49,6 +50,7 @@ setPrototype.confirmEdge = function(fromNode,toNode) {
   }
   return false;
 };
+*/
 
 /*
  * Complexity: What is the time complexity of the above functions?

@@ -61,8 +61,40 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
     this._edges.each(removeAllEdgesOnNode.bind(this));
   }else{
     this._edges.each(removeEdge.bind(this));
+    this.cleanUpNode(toNode);
+    this.cleanUpNode(fromNode)
   }
 };
+
+Graph.prototype.cleanUpNode = function(node) {
+
+  var adrift = true;
+
+  //Loop through each Edge Pair
+  this._edges.each(function(pair){
+  //See if either edge pair contains that node
+    if(pair.contains(node)){
+      adrift = false;
+    }
+  }.bind(this));
+
+    //At end of looping through all edge pairs, if no match, then delete that node
+  if(adrift){
+    this.removeNode(node);
+  }
+}
+
+
+setPrototype.confirmEdge = function(fromNode,toNode) {
+  for (var i=0; i<this._storage.length; i++) {
+    if (this._storage[i].contains(fromNode) && this._storage[i].contains(toNode)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
